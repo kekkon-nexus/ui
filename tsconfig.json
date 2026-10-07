@@ -1,0 +1,11 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": ["@kekkon-nexus/config/ts", "@kekkon-nexus/config/ts/strict"],
+	"compilerOptions": {
+		"customConditions": ["dev"],
+
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"exclude": ["./dist"]
+}
