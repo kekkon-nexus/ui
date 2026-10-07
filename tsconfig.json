@@ -5,6 +5,7 @@
 		"customConditions": ["dev"],
 
 		"noEmit": true,
+		"types": ["bun"],
 		"skipLibCheck": true
 	},
 	"exclude": ["./dist"]

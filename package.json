@@ -39,11 +39,13 @@
 		"lint": "vp lint",
 		"prepare": "vp config",
 		"prepack": "vpr build",
-		"pack": "bun pm pack"
+		"pack": "bun pm pack",
+		"bump": "bun run scripts/bump.ts"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^21.2.3",
 		"@kekkon-nexus/config": "^3.4.0",
+		"@types/bun": "latest",
 		"eslint-plugin-no-relative-import-paths": "^1.6.1",
 		"oxfmt": ">=0.72.0 <1",
 		"oxlint": "^1.87.0",
