@@ -1,0 +1,50 @@
+{
+	"name": "@kekkon-nexus/ui",
+	"version": "0.0.0",
+	"description": "",
+	"homepage": "https://github.com/kekkon-nexus/ui#readme",
+	"bugs": "https://github.com/kekkon-nexus/ui/issues",
+	"license": "MIT",
+	"author": "Ryan Suhartanto <suhartanto@kekkon.nexus>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kekkon-nexus/ui.git",
+		"directory": "packages/ui"
+	},
+	"files": [
+		"./dist/"
+	],
+	"type": "module",
+	"imports": {
+		"#/*": {
+			"dev": "./src/*.ts",
+			"module-sync": "./dist/*.js",
+			"types": "./dist/*.d.ts"
+		},
+		"#/package.json": "./package.json"
+	},
+	"exports": {
+		".": {
+			"dev": "./src/index.ts",
+			"module-sync": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true,
+		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"prepack": "vpr build",
+		"build": "vp pack",
+		"pack": "vp pm pack --pack-destination ../.."
+	},
+	"devDependencies": {
+		"vite-plus": "^1.1.0"
+	},
+	"engines": {
+		"node": "^24.14.0 || >=26"
+	}
+}

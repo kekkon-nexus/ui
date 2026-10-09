@@ -5,8 +5,9 @@
 		"customConditions": ["dev"],
 
 		"noEmit": true,
+		"isolatedDeclarations": true,
 		"types": ["bun"],
 		"skipLibCheck": true
 	},
-	"exclude": ["./dist"]
+	"exclude": ["./packages/*/dist"]
 }
