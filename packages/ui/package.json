@@ -12,22 +12,25 @@
 		"directory": "packages/ui"
 	},
 	"files": [
-		"./dist/"
+		"dist/",
+		"!dist/components/*/define.d.ts"
 	],
 	"type": "module",
-	"imports": {
-		"#/*": {
-			"dev": "./src/*.ts",
-			"module-sync": "./dist/*.js",
-			"types": "./dist/*.d.ts"
-		},
-		"#/package.json": "./package.json"
-	},
+	"sideEffects": [
+		"./dist/components/*/define.js"
+	],
 	"exports": {
-		".": {
-			"dev": "./src/index.ts",
-			"module-sync": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+		"./*": {
+			"module-sync": "./dist/components/*/index.js",
+			"types": "./dist/components/*/index.d.ts"
+		},
+		"./*/define": {
+			"module-sync": "./dist/components/*/define.js",
+			"types": "./dist/components.d.ts"
+		},
+		"./utils/*": {
+			"module-sync": "./dist/utils/*.js",
+			"types": "./dist/utils/*.d.ts"
 		},
 		"./package.json": "./package.json"
 	},
@@ -41,7 +44,12 @@
 		"build": "vp pack",
 		"pack": "vp pm pack --pack-destination ../.."
 	},
+	"dependencies": {
+		"@stencil/core": "5.0.0-beta.19"
+	},
 	"devDependencies": {
+		"@stencil/unplugin": "5.0.0-beta.19",
+		"typescript": "npm:@typescript/typescript6@^6",
 		"vite-plus": "^1.1.0"
 	},
 	"engines": {

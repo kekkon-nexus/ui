@@ -5,12 +5,14 @@ import oxlint from "@kekkon-nexus/config/oxlint";
 import vp from "@kekkon-nexus/config/oxlint/vite-plus";
 import { defineConfig } from "vite-plus";
 
-export default defineConfig({
+const config: ReturnType<typeof defineConfig> = defineConfig({
 	fmt: {
 		...oxfmt,
+		ignorePatterns: ["packages/ui/src/components.d.ts"],
 	},
 	lint: {
 		extends: [oxlint, vp],
+		ignorePatterns: ["packages/ui/src/components.d.ts"],
 		options: {
 			typeAware: true,
 			typeCheck: true,
@@ -24,13 +26,14 @@ export default defineConfig({
 
 		overrides: await Array.fromAsync(glob("packages/*"), (dir) => ({
 			files: [`${dir}/**`],
+			env: { browser: true },
 			rules: {
 				"no-relative-import-paths/no-relative-import-paths": [
 					"warn",
 					{
 						allowSameFolder: false,
 						rootDir: `./${dir}/src`,
-						prefix: "#",
+						prefix: "@",
 					},
 				],
 			},
@@ -41,15 +44,12 @@ export default defineConfig({
 	},
 
 	resolve: {
-		conditions: ["dev"],
-	},
-	ssr: {
-		resolve: {
-			conditions: ["dev"],
-		},
+		tsconfigPaths: true,
 	},
 
 	run: {
 		cache: true,
 	},
 });
+
+export default config;

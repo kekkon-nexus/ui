@@ -2,11 +2,9 @@
 	"$schema": "https://www.schemastore.org/tsconfig",
 	"extends": ["@kekkon-nexus/config/ts", "@kekkon-nexus/config/ts/strict"],
 	"compilerOptions": {
-		"customConditions": ["dev"],
-
-		"noEmit": true,
-		"isolatedDeclarations": true,
 		"types": ["bun"],
+		"isolatedDeclarations": true,
+
 		"skipLibCheck": true
 	},
 	"exclude": ["./packages/*/dist"]
