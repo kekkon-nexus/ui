@@ -28,10 +28,6 @@
 			"module-sync": "./dist/components/*/define.js",
 			"types": "./dist/components.d.ts"
 		},
-		"./utils/*": {
-			"module-sync": "./dist/utils/*.js",
-			"types": "./dist/utils/*.d.ts"
-		},
 		"./package.json": "./package.json"
 	},
 	"publishConfig": {
