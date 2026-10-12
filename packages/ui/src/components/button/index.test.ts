@@ -42,6 +42,75 @@ it("disabled swallows the click", async () => {
 	expect(onClick).not.toHaveBeenCalled();
 });
 
+it("disabled leaves the tab order", async () => {
+	const parent = document.createElement("div");
+	await mount({ disabled: "" }, parent);
+	// Without a later tab stop, Tab moves focus out of the document and the next test starts there.
+	const next = document.createElement("button");
+	parent.append(next);
+
+	await userEvent.tab();
+
+	expect(document.activeElement).toBe(next);
+});
+
+it("focusable when disabled stays in the tab order", async () => {
+	const host = await mount({ "disabled": "", "focusable-when-disabled": "" });
+	await expect
+		.poll(() =>
+			host.shadowRoot?.querySelector("button")?.getAttribute("aria-disabled"),
+		)
+		.toBe("true");
+
+	await userEvent.tab();
+
+	expect(document.activeElement).toBe(host);
+});
+
+it("focusable when disabled swallows the click", async () => {
+	const host = await mount({ "disabled": "", "focusable-when-disabled": "" });
+	const onClick = vi.fn();
+	host.addEventListener("click", onClick);
+
+	await userEvent.click(host);
+
+	expect(onClick).not.toHaveBeenCalled();
+});
+
+it("focusable when disabled leaves the owning form alone", async () => {
+	const form = document.createElement("form");
+	const onSubmit = vi.fn((event: Event) => event.preventDefault());
+	form.addEventListener("submit", onSubmit);
+	const host = await mount(
+		{ "disabled": "", "focusable-when-disabled": "", "type": "submit" },
+		form,
+	);
+
+	await userEvent.click(host);
+
+	expect(onSubmit).not.toHaveBeenCalled();
+});
+
+it("focusable when disabled does not invoke commandfor", async () => {
+	const dialog = document.createElement("dialog");
+	dialog.id = "dialog";
+	const parent = document.createElement("div");
+	parent.append(dialog);
+	const host = await mount(
+		{
+			"disabled": "",
+			"focusable-when-disabled": "",
+			"command": "show-modal",
+			"commandfor": "dialog",
+		},
+		parent,
+	);
+
+	await userEvent.click(host);
+
+	expect(dialog.open).toBe(false);
+});
+
 it("button type leaves the owning form alone", async () => {
 	const form = document.createElement("form");
 	const onSubmit = vi.fn((event: Event) => event.preventDefault());
