@@ -1,0 +1,29 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 0eb14283b072def29a9c0b3ff96f02f1b77e8132..c0e50551805aaddc0793a393aab0acce6ac6ec6b 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1,11 +1,10 @@
+ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+ import { dirname, extname, join, normalize, resolve } from "node:path";
+ import { createFilter } from "@rollup/pluginutils";
+-import { buildHydrateCss, cmpMetaToDocsComponent, foldBuildFlags, generateComponentTypesFile, generateManifest, getScopeId, parseCssOnlyComponents, scopeCss, transpile, transpileSync, validateHydrated } from "@stencil/core/compiler";
++import { buildHydrateCss, cmpMetaToDocsComponent, foldBuildFlags, generateComponentTypesFile, generateManifest, getScopeId, parseCssOnlyComponents, scopeCss, transpile, transpileSync, ts, validateHydrated } from "@stencil/core/compiler";
+ import { createUnplugin } from "unplugin";
+ import { fileURLToPath } from "node:url";
+ import { isPackageExists } from "local-pkg";
+-import ts from "typescript";
+ //#region src/css.ts
+ /**
+ * CSS pipeline for Stencil component stylesheets.
+diff --git a/package.json b/package.json
+index 2697db700ff772abe90d781665a4a62b8eb837e7..3bf3f71cc4add3a33240f8aeee7869f76d4df583 100644
+--- a/package.json
++++ b/package.json
+@@ -53,7 +53,6 @@
+     "postcss": "^8.0.0",
+     "postcss-load-config": "^4.0.0 || ^5.0.0 || ^6.0.0",
+     "sass": "^1.0.0",
+-    "typescript": ">=5.0.0",
+     "@stencil/core": "^5.0.0 || 5.0.0-beta.19"
+   },
+   "peerDependenciesMeta": {
