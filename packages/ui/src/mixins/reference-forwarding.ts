@@ -74,23 +74,23 @@ function sync(host: HTMLElement): void {
 
 export const ReferenceForwarding = <B extends MixedInCtor>(Base: B): B => {
 	class ReferenceForwarding extends Base {
-		observer?: MutationObserver;
+		#observer?: MutationObserver;
 
 		connectedCallback(): void {
 			const host = getElement(this);
-			this.observer = new MutationObserver((records) => {
+			this.#observer = new MutationObserver((records) => {
 				const control = getControl(host);
 				if (!control) return;
 				for (const { attributeName } of records) {
 					if (attributeName) forward(host, control, attributeName);
 				}
 			});
-			this.observer.observe(host, { attributes: true });
+			this.#observer.observe(host, { attributes: true });
 			sync(host);
 		}
 
 		disconnectedCallback(): void {
-			this.observer?.disconnect();
+			this.#observer?.disconnect();
 		}
 
 		componentDidLoad(): void {

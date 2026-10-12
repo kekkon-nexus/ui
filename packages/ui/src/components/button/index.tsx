@@ -17,7 +17,7 @@ export class Button extends Base {
 
 	@Prop() type: "button" | "reset" | "submit" = "button";
 
-	private onClick = (): void => {
+	#onClick = (): void => {
 		const { form } = this.internals;
 		if (this.type === "submit") form?.requestSubmit();
 		else if (this.type === "reset") form?.reset();
@@ -29,7 +29,7 @@ export class Button extends Base {
 				id={CONTROL_ID}
 				type="button"
 				disabled={this.disabled}
-				onClick={this.onClick}
+				onClick={this.#onClick}
 			>
 				<slot />
 			</button>
