@@ -11,6 +11,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * @default false
+         */
+        "focusableWhenDisabled": boolean;
+        /**
           * @default "button"
          */
         "type": "button" | "reset" | "submit";
@@ -34,6 +38,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * @default false
+         */
+        "focusableWhenDisabled"?: boolean;
+        /**
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
@@ -49,6 +57,7 @@ declare namespace LocalJSX {
 
     interface KnuiButtonAttributes {
         "disabled": boolean;
+        "focusableWhenDisabled": boolean;
         "type": "button" | "reset" | "submit";
     }
 
