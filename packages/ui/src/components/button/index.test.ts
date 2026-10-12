@@ -3,13 +3,13 @@ import { userEvent } from "vite-plus/test/browser";
 
 import "@/components/button/define";
 
+const referenceTargetSupported = "referenceTarget" in ShadowRoot.prototype;
+
 async function mount(
-	disabled: boolean,
 	attributes: Record<string, string> = {},
 	parent?: Element,
 ): Promise<HTMLElement> {
 	const host = document.createElement("knui-button");
-	host.toggleAttribute("disabled", disabled);
 	for (const [name, value] of Object.entries(attributes)) {
 		host.setAttribute(name, value);
 	}
@@ -23,7 +23,7 @@ async function mount(
 }
 
 it("click reaches the host", async () => {
-	const host = await mount(false);
+	const host = await mount();
 	const onClick = vi.fn();
 	host.addEventListener("click", onClick);
 
@@ -33,7 +33,7 @@ it("click reaches the host", async () => {
 });
 
 it("disabled swallows the click", async () => {
-	const host = await mount(true);
+	const host = await mount({ disabled: "" });
 	const onClick = vi.fn();
 	host.addEventListener("click", onClick);
 
@@ -42,11 +42,22 @@ it("disabled swallows the click", async () => {
 	expect(onClick).not.toHaveBeenCalled();
 });
 
+it("button type leaves the owning form alone", async () => {
+	const form = document.createElement("form");
+	const onSubmit = vi.fn((event: Event) => event.preventDefault());
+	form.addEventListener("submit", onSubmit);
+	const host = await mount({}, form);
+
+	await userEvent.click(host);
+
+	expect(onSubmit).not.toHaveBeenCalled();
+});
+
 it("submit type submits the owning form", async () => {
 	const form = document.createElement("form");
 	const onSubmit = vi.fn((event: Event) => event.preventDefault());
 	form.addEventListener("submit", onSubmit);
-	const host = await mount(false, { type: "submit" }, form);
+	const host = await mount({ type: "submit" }, form);
 
 	await userEvent.click(host);
 
@@ -57,7 +68,7 @@ it("reset type resets the owning form", async () => {
 	const form = document.createElement("form");
 	const onReset = vi.fn();
 	form.addEventListener("reset", onReset);
-	const host = await mount(false, { type: "reset" }, form);
+	const host = await mount({ type: "reset" }, form);
 
 	await userEvent.click(host);
 
@@ -70,7 +81,6 @@ it("commandfor on the host invokes from the inner button", async () => {
 	const parent = document.createElement("div");
 	parent.append(dialog);
 	const host = await mount(
-		false,
 		{ command: "show-modal", commandfor: "dialog" },
 		parent,
 	);
@@ -80,8 +90,48 @@ it("commandfor on the host invokes from the inner button", async () => {
 	expect(dialog.open).toBe(true);
 });
 
+it("aria-labelledby on the host resolves to elements for the inner button", async () => {
+	const first = document.createElement("span");
+	first.id = "first";
+	const second = document.createElement("span");
+	second.id = "second";
+	const parent = document.createElement("div");
+	parent.append(first, second);
+	const host = await mount(
+		{ "aria-labelledby": "first  missing second" },
+		parent,
+	);
+
+	await expect
+		.poll(() =>
+			host.shadowRoot
+				?.querySelector("button")
+				?.ariaLabelledByElements?.map((element) => element.id),
+		)
+		.toEqual(["first", "second"]);
+});
+
+// Without reference target the label clicks the host, which never reaches the inner button.
+it.runIf(referenceTargetSupported)(
+	"label for the host activates the inner button",
+	async () => {
+		const form = document.createElement("form");
+		const onSubmit = vi.fn((event: Event) => event.preventDefault());
+		form.addEventListener("submit", onSubmit);
+		const label = document.createElement("label");
+		label.htmlFor = "save";
+		label.textContent = "Save changes";
+		form.append(label);
+		await mount({ id: "save", type: "submit" }, form);
+
+		await userEvent.click(label);
+
+		expect(onSubmit).toHaveBeenCalledOnce();
+	},
+);
+
 it("aria attributes set later reach the inner button", async () => {
-	const host = await mount(false);
+	const host = await mount();
 
 	host.setAttribute("aria-label", "Save draft");
 

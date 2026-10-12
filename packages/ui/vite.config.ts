@@ -48,7 +48,10 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 								browser: "firefox" as const,
 								provider: webdriverio({
 									capabilities: {
-										"moz:firefoxOptions": { binary: FIREFOX_BIN },
+										"moz:firefoxOptions": {
+											binary: FIREFOX_BIN,
+											prefs: { "dom.shadowdom.referenceTarget.enabled": true },
+										},
 										"wdio:enforceWebDriverClassic": true,
 									},
 								}),
