@@ -26,7 +26,7 @@
 		"vite-plus": "catalog:"
 	},
 	"overrides": {
-		"@stencil/unplugin>typescript": "catalog:stencil",
+		"@stencil/unplugin>typescript": "npm:@typescript/typescript6@^6",
 		"oxfmt": "catalog:dev",
 		"oxlint": "catalog:dev",
 		"vite": "npm:@voidzero-dev/vite-plus-core@^1.1.0",
@@ -55,8 +55,7 @@
 		},
 		"stencil": {
 			"@stencil/core": "5.0.0-beta.19",
-			"@stencil/unplugin": "5.0.0-beta.19",
-			"typescript": "npm:@typescript/typescript6@^6"
+			"@stencil/unplugin": "5.0.0-beta.19"
 		},
 		"test": {
 			"@vitest/browser-webdriverio": "^5.0.0",

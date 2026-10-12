@@ -31,7 +31,7 @@
   },
   "overrides": {
     "@stencil/unplugin": {
-      "typescript": "catalog:stencil",
+      "typescript": "npm:@typescript/typescript6@^6",
     },
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",
@@ -55,7 +55,6 @@
     "stencil": {
       "@stencil/core": "5.0.0-beta.19",
       "@stencil/unplugin": "5.0.0-beta.19",
-      "typescript": "npm:@typescript/typescript6@^6",
     },
     "test": {
       "@vitest/browser-webdriverio": "^5.0.0",
