@@ -26,7 +26,6 @@
 		"vite-plus": "catalog:"
 	},
 	"overrides": {
-		"@stencil/unplugin>typescript": "npm:@typescript/typescript6@^6",
 		"oxfmt": "catalog:dev",
 		"oxlint": "catalog:dev",
 		"vite": "npm:@voidzero-dev/vite-plus-core@^1.1.0",
