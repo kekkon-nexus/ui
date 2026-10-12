@@ -10,6 +10,10 @@ export namespace Components {
           * @default false
          */
         "disabled": boolean;
+        /**
+          * @default "button"
+         */
+        "type": "button" | "reset" | "submit";
     }
 }
 declare global {
@@ -29,10 +33,23 @@ declare namespace LocalJSX {
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
+        /**
+          * @default "button"
+         */
+        "type"?: "button" | "reset" | "submit";
     }
 
     interface KnuiButtonAttributes {
         "disabled": boolean;
+        "type": "button" | "reset" | "submit";
     }
 
     interface IntrinsicElements {

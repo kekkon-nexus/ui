@@ -3,11 +3,14 @@ import type { JSX } from "@stencil/core/jsx-runtime";
 
 import { CONTROL_ID, ReferenceForwarding } from "@/mixins/reference-forwarding";
 
+const Base: ReturnType<typeof Mixin<[typeof ReferenceForwarding]>> =
+	Mixin(ReferenceForwarding);
+
 @Component({
 	tag: "knui-button",
 	encapsulation: { type: "shadow" },
 })
-export class Button extends Mixin(ReferenceForwarding) {
+export class Button extends Base {
 	@AttachInternals() internals!: ElementInternals;
 
 	@Prop() disabled = false;
