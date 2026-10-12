@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: read
+
+jobs:
+  qc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+      - run: bun ci
+
+      - run: bun commitlint --last
+      - run: bun vp check
+
+      - run: bun run build
+      - run: bun run pack
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ui
+          path: kekkon-nexus-ui-*.tgz
+          archive: false
+
+  e2e:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: chrome
+            os: ubuntu-latest
+            chrome: /usr/bin/google-chrome
+          - browser: firefox
+            os: ubuntu-latest
+            firefox: /usr/bin/firefox
+          - browser: safari
+            os: macos-latest
+            safari: true
+
+    name: e2e (${{ matrix.browser }})
+    runs-on: ${{ matrix.os }}
+
+    env:
+      CHROME_BIN: ${{ matrix.chrome }}
+      FIREFOX_BIN: ${{ matrix.firefox }}
+      SAFARI_BIN: ${{ matrix.safari }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+      - run: bun ci
+
+      - if: matrix.browser == 'safari'
+        run: defaults write com.apple.Safari ExperimentalServerTimingEnabled -bool true
+      - run: bun run test
