@@ -24,6 +24,9 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 			},
 		],
 
+		env: {
+			node: true,
+		},
 		overrides: await Array.fromAsync(glob("packages/*"), (dir) => ({
 			files: [`${dir}/**`],
 			env: { browser: true },
@@ -49,6 +52,10 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 
 	run: {
 		cache: true,
+	},
+
+	test: {
+		projects: ["packages/*"],
 	},
 });
 
