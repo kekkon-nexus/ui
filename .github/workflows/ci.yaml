@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: 26
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
       - run: bun ci
 
       - run: bun commitlint --last
@@ -65,6 +67,8 @@ jobs:
         with:
           node-version: 26
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
       - run: bun ci
 
       - if: matrix.browser == 'safari'
