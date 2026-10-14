@@ -29,9 +29,6 @@
       },
     },
   },
-  "patchedDependencies": {
-    "@stencil/unplugin@5.0.0-beta.19": "patches/@stencil%2Funplugin@5.0.0-beta.19.patch",
-  },
   "overrides": {
     "oxfmt": "catalog:dev",
     "oxlint": "catalog:dev",
@@ -53,8 +50,8 @@
       "oxlint-tsgolint": "^7.0.2003",
     },
     "stencil": {
-      "@stencil/core": "5.0.0-beta.19",
-      "@stencil/unplugin": "5.0.0-beta.19",
+      "@stencil/core": "5.0.0-beta.23",
+      "@stencil/unplugin": "5.0.0-beta.23",
     },
     "test": {
       "@vitest/browser-webdriverio": "^5.0.0",
@@ -308,17 +305,17 @@
 
     "@simple-libs/stream-utils": ["@simple-libs/stream-utils@2.0.0", "", {}, "sha512-fCTuZK4QBa+39Oz9l4OGfJfz+GpwCp3AqO7Zch3to99xHPgstVsRFpeQ8LNd2o1Gv8raL2mCFwiaHh7bFSp5DQ=="],
 
-    "@stencil/cli": ["@stencil/cli@5.0.0-beta.19", "", { "dependencies": { "@clack/prompts": "^1.7.0", "@stencil/dev-server": "5.0.0-beta.19", "@stencil/templates": "5.0.0-beta.19", "local-pkg": "^1.2.1", "nypm": "^0.3.12", "std-env": "^3.10.0", "typescript": ">5.0.0 <7.0.0" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.19" }, "bin": { "stencil": "bin/stencil.mjs" } }, "sha512-+KEJGThUP2OZaf0mJvnH9KKhxhFZ2P3bwCYp/X+KMUrC6cMxuS1aTObPLPM+9jAWrxn4zdAFxvKnbxvSp9k9Zg=="],
+    "@stencil/cli": ["@stencil/cli@5.0.0-beta.23", "", { "dependencies": { "@clack/prompts": "^1.7.0", "@stencil/dev-server": "5.0.0-beta.23", "@stencil/templates": "5.0.0-beta.23", "local-pkg": "^1.2.1", "nypm": "^0.3.12", "std-env": "^3.10.0", "typescript": ">5.0.0 <7.0.0" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.23" }, "bin": { "stencil": "bin/stencil.mjs" } }, "sha512-KISwD2eJHy/yYUYTEK473zg/O0ljJ7ibEPXQRbWej+co4Ulyxv4XliY4PpZp/OVDaB1Cg/T0rXOev8f8OOxWZw=="],
 
-    "@stencil/core": ["@stencil/core@5.0.0-beta.19", "", { "dependencies": { "@parcel/watcher": "^2.6.0", "@preact/signals-core": "^1.14.4", "@rollup/pluginutils": "^5.4.0", "@stencil/cli": "5.0.0-beta.19", "@stencil/dev-server": "5.0.0-beta.19", "@stencil/mock-doc": "5.0.0-beta.19", "browserslist": "^4.28.8", "chalk": "^5.6.2", "css-what": "^7.0.0", "jiti": "^2.7.0", "lightningcss": "^1.33.0", "magic-string": "^0.30.21", "picomatch": "^4.0.5", "postcss": "^8.5.26", "postcss-nesting": "^14.0.1", "postcss-safe-parser": "^7.0.1", "postcss-selector-parser": "^7.1.5", "resolve": "^1.22.12", "rolldown": "^1.2.6", "semver": "^7.8.5", "terser": "^5.50.0", "tinyglobby": "^0.2.17", "typescript": ">5.0.0 <7.0.0" }, "bin": { "stencil": "bin/stencil.mjs" } }, "sha512-kEWHBi5oINYUecG7LyoEcd1EPy5xt58XWtn5mOVzQPArlANY2mMLXBUUu3h1EI4sGhs/FOOR059+7SFgMi2ozA=="],
+    "@stencil/core": ["@stencil/core@5.0.0-beta.23", "", { "dependencies": { "@parcel/watcher": "^2.6.0", "@preact/signals-core": "^1.14.4", "@rollup/pluginutils": "^5.4.0", "@stencil/cli": "5.0.0-beta.23", "@stencil/dev-server": "5.0.0-beta.23", "@stencil/mock-doc": "5.0.0-beta.23", "browserslist": "^4.28.8", "chalk": "^5.6.2", "css-what": "^7.0.0", "jiti": "^2.7.0", "lightningcss": "^1.33.0", "magic-string": "^0.30.21", "picomatch": "^4.0.5", "postcss": "^8.5.26", "postcss-nesting": "^14.0.1", "postcss-safe-parser": "^7.0.1", "postcss-selector-parser": "^7.1.5", "resolve": "^1.22.12", "rolldown": "^1.2.6", "semver": "^7.8.5", "terser": "^5.50.0", "tinyglobby": "^0.2.17", "typescript": ">5.0.0 <7.0.0" }, "bin": { "stencil": "bin/stencil.mjs" } }, "sha512-4v622QDXegzUDD0ujk+dzkYVj+STDx6FiJDE3YmLgBAa3U16YHsBbk3qn05bjU2iMx0guVrJHS12dziGiE1FqQ=="],
 
-    "@stencil/dev-server": ["@stencil/dev-server@5.0.0-beta.19", "", { "dependencies": { "launch-editor": "^2.14.1", "open": "^11.0.0", "ws": "^8.21.3" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.19" } }, "sha512-d/InvJQSNE5vK+Lp1vrkTpJNXOMdADTAKy8GF8ynszypUwLodM4Yav2xAasYqjt1vmzqDDYfuYYhwDowzEgSHA=="],
+    "@stencil/dev-server": ["@stencil/dev-server@5.0.0-beta.23", "", { "dependencies": { "launch-editor": "^2.14.1", "open": "^11.0.0", "ws": "^8.21.3" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.23" } }, "sha512-EjlSr44zP+FXIlUTzMtBGX9g7xhVnZBccStsmkRYhjVjn2W7wfLmBbfhMzbpeYzoIWKPdZoIejdtmYt+XvtfiQ=="],
 
-    "@stencil/mock-doc": ["@stencil/mock-doc@5.0.0-beta.19", "", { "dependencies": { "nwsapi": "^2.2.24", "parse5": "^8.0.1" } }, "sha512-iIZcAaXMnzW0onp9asdAuHAAx20s0ftOFz98huTvjHgFCvgNBvgnGIwaIiZ7zCENf31f4zhpxzgJ6dvYStnu9g=="],
+    "@stencil/mock-doc": ["@stencil/mock-doc@5.0.0-beta.23", "", { "dependencies": { "nwsapi": "^2.2.24", "parse5": "^8.0.1" } }, "sha512-IAtPdHxR6plboFwikye4gry0pDvDlI0OQK2YmtFYfJNw3p43X2k+6PmC/kkXv2r0lfjrZQIw1bj4CVnGyOxlyA=="],
 
-    "@stencil/templates": ["@stencil/templates@5.0.0-beta.19", "", { "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.19" } }, "sha512-FC7DVz7Ar/fKT5kbxnQw3LYeJ3fm72YmrJ+ejEtJELlSCGXhW6m7tTUAWCZMyu/bO0JHII/DfwxZ+5z02MioUA=="],
+    "@stencil/templates": ["@stencil/templates@5.0.0-beta.23", "", { "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.23" } }, "sha512-s2T8WF9I5fir28HOUgwWCPM9+XPFRvRL4M2tCvkEQT110kKw9X7zU/S9boz8BRDUzWGEnhyueIIYcDI0vRO8FQ=="],
 
-    "@stencil/unplugin": ["@stencil/unplugin@5.0.0-beta.19", "", { "dependencies": { "@rollup/pluginutils": "^5.4.0", "jiti": "^2.7.0", "local-pkg": "^1.2.1", "unplugin": "^3.3.0" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.19", "less": "^4.0.0", "lightningcss": "^1.0.0", "postcss": "^8.0.0", "postcss-load-config": "^4.0.0 || ^5.0.0 || ^6.0.0", "sass": "^1.0.0", "typescript": ">=5.0.0" }, "optionalPeers": ["less", "lightningcss", "postcss", "postcss-load-config", "sass"] }, "sha512-9ZfgugFMioStp4/lFFfvEGtVeZHPvnQF2Gm4o1cbdnFU8Baam4VXz0Ju0LJ59F8JxyPX10a+ZKVskkLLmWgciw=="],
+    "@stencil/unplugin": ["@stencil/unplugin@5.0.0-beta.23", "", { "dependencies": { "@rollup/pluginutils": "^5.4.0", "jiti": "^2.7.0", "local-pkg": "^1.2.1", "unplugin": "^3.3.0" }, "peerDependencies": { "@stencil/core": "^5.0.0 || 5.0.0-beta.23", "less": "^4.0.0", "lightningcss": "^1.0.0", "postcss": "^8.0.0", "postcss-load-config": "^4.0.0 || ^5.0.0 || ^6.0.0", "sass": "^1.0.0" }, "optionalPeers": ["less", "lightningcss", "postcss", "postcss-load-config", "sass"] }, "sha512-j2mmmH3hsVb4Kzc2mzw1cUlKrmw7rSR4hSYJFrLJCuZCyiG9dx1h4x+nyzMw3tuMpqQKQDDr9Az+L6LcsPZLAw=="],
 
     "@testing-library/dom": ["@testing-library/dom@10.4.2", "", { "dependencies": { "@babel/code-frame": "^7.10.4", "@babel/runtime": "^7.12.5", "@types/aria-query": "^5.0.1", "aria-query": "5.3.0", "dom-accessibility-api": "^0.5.9", "lz-string": "^1.5.0", "picocolors": "1.1.1", "pretty-format": "^27.0.2" } }, "sha512-yzr2S9HyAIdhz2/6qHgbs665Q7PKVcDF05vsOlHPxG1mo36gKVesdYVeDLnXgfjJ03CrKRk08knc6+E/9m8v2Q=="],
 
