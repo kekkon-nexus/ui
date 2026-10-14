@@ -62,13 +62,9 @@ jobs:
 
       - if: matrix.browser == 'safari'
         run: |
-          defaults write com.apple.Safari WebKitShadowRootReferenceTargetEnabled -bool true
-          defaults write com.apple.Safari WebKitShadowRootReferenceTargetEnabledForAriaOwns -bool true
-          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2ShadowRootReferenceTargetEnabled -bool true
-          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2ShadowRootReferenceTargetEnabledForAriaOwns -bool true
-          defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari WebKitShadowRootReferenceTargetEnabled -bool true
-          defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari WebKitShadowRootReferenceTargetEnabledForAriaOwns -bool true
-          defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2ShadowRootReferenceTargetEnabled -bool true
-          defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2ShadowRootReferenceTargetEnabledForAriaOwns -bool true
+          prefs=~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+          defaults write "$prefs" WebKitExperimentalShadowRootReferenceTargetEnabled -bool true
+          defaults write "$prefs" WebKitExperimentalShadowRootReferenceTargetEnabledForAriaOwns -bool true
+          defaults write "$prefs" SafariVersionForExperimentalFeatures -string "$(sw_vers -productVersion)"
           defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
       - run: bun run test
