@@ -44,6 +44,7 @@
 		"@stencil/core": "catalog:stencil"
 	},
 	"devDependencies": {
+		"@mozilla/readability": "catalog:test",
 		"@stencil/unplugin": "catalog:stencil",
 		"@vitest/browser-webdriverio": "catalog:test",
 		"vite-plus": "catalog:",

@@ -3,6 +3,8 @@ import { webdriverio } from "@vitest/browser-webdriverio";
 import { defineConfig } from "vite-plus";
 
 // oxlint-disable-next-line no-relative-import-paths/no-relative-import-paths -- Vite doesn't resolve tsconfig paths in its own config
+import { computedRole } from "./commands/computed-role.ts";
+// oxlint-disable-next-line no-relative-import-paths/no-relative-import-paths -- Vite doesn't resolve tsconfig paths in its own config
 import { noSelfRegister } from "./plugins/no-self-register.ts";
 
 const { CHROME_BIN, FIREFOX_BIN, SAFARI_BIN } = process.env;
@@ -26,6 +28,7 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 			enabled: true,
 			headless: true,
 			provider: webdriverio(),
+			commands: { computedRole },
 			// WebdriverIO downloads a browser it isn't given a path to, so a browser
 			// only runs when its path is set. It fetches the matching driver itself.
 			instances: [

@@ -22,6 +22,7 @@
         "@stencil/core": "catalog:stencil",
       },
       "devDependencies": {
+        "@mozilla/readability": "catalog:test",
         "@stencil/unplugin": "catalog:stencil",
         "@vitest/browser-webdriverio": "catalog:test",
         "vite-plus": "catalog:",
@@ -54,6 +55,7 @@
       "@stencil/unplugin": "5.0.0-beta.26",
     },
     "test": {
+      "@mozilla/readability": "^0.6.0",
       "@vitest/browser-webdriverio": "^5.0.0",
       "webdriverio": "^10.0.2",
     },
@@ -136,6 +138,8 @@
     "@kekkon-nexus/config": ["@kekkon-nexus/config@3.4.0", "", { "dependencies": { "@commitlint/config-conventional": "^21.2.3", "@commitlint/format": "^21.2.3", "commitlint-config-gitmoji": "^2.3.1" }, "peerDependencies": { "@commitlint/cli": "^21.2.3", "oxfmt": ">=0.72.0 <1", "oxlint": "^1.87.0", "oxlint-tsgolint": "^7.0.2003", "typescript": "^7.0.2", "vite-plus": "^1.1.0" }, "optionalPeers": ["@commitlint/cli", "oxfmt", "oxlint", "oxlint-tsgolint", "vite-plus"] }, "sha512-23OhzDSeBuzA+O+Qm4KlUpPNyeEPldDvnBvTUoLb733ZzcBV4bPXaMAbqSxux7hnXHz5xMFbs8wvXm/2953WiQ=="],
 
     "@kekkon-nexus/ui": ["@kekkon-nexus/ui@workspace:packages/ui"],
+
+    "@mozilla/readability": ["@mozilla/readability@0.6.0", "", {}, "sha512-juG5VWh4qAivzTAeMzvY9xs9HY5rAcr2E4I7tiSSCokRFi7XIZCAu92ZkSTsIj1OPceCifL3cpfteP3pDT9/QQ=="],
 
     "@oxc-project/runtime": ["@oxc-project/runtime@0.153.0", "", {}, "sha512-rXJvtlsVG4xJNq64hiaUTIatE7jbBgpa6l4QgmEa2jLgT3ULH9scUBkpsC9N1DfmqixLEyT6DuK6OSXozziIlw=="],
 
