@@ -21,7 +21,12 @@ const COPIED_ATTRIBUTES = new Set(["command", "popovertargetaction"]);
 // ponytail: IDs resolve when the attribute is forwarded, so a target added or renamed afterwards
 // is missed until the attribute changes or the host reconnects. Observe the root if that bites.
 // oxlint-disable unicorn/no-null -- nullable DOM properties are cleared with `null`
-function forward(host: HTMLElement, control: Element, name: string): void {
+function forward(
+	host: HTMLElement,
+	control: Element,
+	name: string,
+	copies: (name: string) => boolean,
+): void {
 	const value = host.getAttribute(name);
 	const root = host.getRootNode() as Document | ShadowRoot;
 	const find = (id: string): Element | null =>
@@ -43,7 +48,7 @@ function forward(host: HTMLElement, control: Element, name: string): void {
 						.map((id) => find(id))
 						.filter((element) => element !== null),
 		);
-	} else if (COPIED_ATTRIBUTES.has(name) || name.startsWith("aria-")) {
+	} else if (copies(name)) {
 		if (value === null) control.removeAttribute(name);
 		else control.setAttribute(name, value);
 	}
@@ -54,7 +59,7 @@ function getControl(host: HTMLElement): Element | undefined {
 	return getShadowRoot(host)?.querySelector(`#${CONTROL_ID}`) ?? undefined;
 }
 
-function sync(host: HTMLElement): void {
+function sync(host: HTMLElement, copies: (name: string) => boolean): void {
 	const control = getControl(host);
 	if (!control || !host.isConnected) return;
 
@@ -64,12 +69,32 @@ function sync(host: HTMLElement): void {
 		Reflect.set(shadowRoot, "referenceTarget", CONTROL_ID);
 	}
 
-	for (const name of host.getAttributeNames()) forward(host, control, name);
+	for (const name of host.getAttributeNames()) {
+		forward(host, control, name, copies);
+	}
 }
 
-export const ReferenceForwarding = <B extends MixedInCtor>(Base: B): B => {
+export interface ReferenceForwardingMembers {
+	copiesAttribute(name: string): boolean;
+}
+
+export const ReferenceForwarding = <B extends MixedInCtor>(
+	Base: B,
+): B & MixedInCtor<ReferenceForwardingMembers> => {
 	class ReferenceForwarding extends Base {
 		#observer?: MutationObserver;
+
+		/**
+		 * Components with more native attributes than a button widen this.
+		 *
+		 * @param name an attribute on the host
+		 * @returns whether the attribute is copied onto the inner control
+		 */
+		copiesAttribute(name: string): boolean {
+			return COPIED_ATTRIBUTES.has(name) || name.startsWith("aria-");
+		}
+
+		#copies = (name: string): boolean => this.copiesAttribute(name);
 
 		connectedCallback(): void {
 			const host = getElement(this);
@@ -77,11 +102,13 @@ export const ReferenceForwarding = <B extends MixedInCtor>(Base: B): B => {
 				const control = getControl(host);
 				if (!control) return;
 				for (const { attributeName } of records) {
-					if (attributeName) forward(host, control, attributeName);
+					if (attributeName) {
+						forward(host, control, attributeName, this.#copies);
+					}
 				}
 			});
 			this.#observer.observe(host, { attributes: true });
-			sync(host);
+			sync(host, this.#copies);
 		}
 
 		disconnectedCallback(): void {
@@ -89,7 +116,7 @@ export const ReferenceForwarding = <B extends MixedInCtor>(Base: B): B => {
 		}
 
 		componentDidLoad(): void {
-			sync(getElement(this));
+			sync(getElement(this), this.#copies);
 		}
 	}
 

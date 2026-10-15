@@ -19,6 +19,8 @@ export namespace Components {
          */
         "type": "button" | "reset" | "submit";
     }
+    interface KnuiInput {
+    }
     interface KnuiSeparator {
         /**
           * @default "horizontal"
@@ -33,6 +35,12 @@ declare global {
         prototype: HTMLKnuiButtonElement;
         new (): HTMLKnuiButtonElement;
     };
+    interface HTMLKnuiInputElement extends Components.KnuiInput, HTMLStencilElement {
+    }
+    var HTMLKnuiInputElement: {
+        prototype: HTMLKnuiInputElement;
+        new (): HTMLKnuiInputElement;
+    };
     interface HTMLKnuiSeparatorElement extends Components.KnuiSeparator, HTMLStencilElement {
     }
     var HTMLKnuiSeparatorElement: {
@@ -41,6 +49,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "knui-button": HTMLKnuiButtonElement;
+        "knui-input": HTMLKnuiInputElement;
         "knui-separator": HTMLKnuiSeparatorElement;
     }
 }
@@ -67,6 +76,20 @@ declare namespace LocalJSX {
          */
         "type"?: "button" | "reset" | "submit";
     }
+    interface KnuiInput {
+        /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
+    }
     interface KnuiSeparator {
         /**
           * @default "horizontal"
@@ -85,6 +108,7 @@ declare namespace LocalJSX {
 
     interface IntrinsicElements {
         "knui-button": Omit<KnuiButton, keyof KnuiButtonAttributes> & { [K in keyof KnuiButton & keyof KnuiButtonAttributes]?: KnuiButton[K] } & { [K in keyof KnuiButton & keyof KnuiButtonAttributes as `attr:${K}`]?: KnuiButtonAttributes[K] } & { [K in keyof KnuiButton & keyof KnuiButtonAttributes as `prop:${K}`]?: KnuiButton[K] };
+        "knui-input": KnuiInput;
         "knui-separator": Omit<KnuiSeparator, keyof KnuiSeparatorAttributes> & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes]?: KnuiSeparator[K] } & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes as `attr:${K}`]?: KnuiSeparatorAttributes[K] } & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes as `prop:${K}`]?: KnuiSeparator[K] };
     }
 }
@@ -93,6 +117,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "knui-button": LocalJSX.IntrinsicElements["knui-button"] & JSXBase.HTMLAttributes<HTMLKnuiButtonElement>;
+            "knui-input": LocalJSX.IntrinsicElements["knui-input"] & JSXBase.HTMLAttributes<HTMLKnuiInputElement>;
             "knui-separator": LocalJSX.IntrinsicElements["knui-separator"] & JSXBase.HTMLAttributes<HTMLKnuiSeparatorElement>;
         }
     }
