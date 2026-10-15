@@ -28,8 +28,8 @@
 	"overrides": {
 		"oxfmt": "catalog:dev",
 		"oxlint": "catalog:dev",
-		"vite": "npm:@voidzero-dev/vite-plus-core@^1.1.0",
-		"vitest": "5.0.3"
+		"vite": "npm:@voidzero-dev/vite-plus-core@^1.2.0",
+		"vitest": "5.0.4"
 	},
 	"devEngines": {
 		"packageManager": {
@@ -39,18 +39,19 @@
 		}
 	},
 	"catalog": {
-		"@kekkon-nexus/config": "^3.4.0",
+		"@kekkon-nexus/config": "^4.0.0",
 		"typescript": "^7.0.2",
-		"vite-plus": "^1.1.0"
+		"unplugin": "^3.4.0",
+		"vite-plus": "^1.2.0"
 	},
 	"catalogs": {
 		"dev": {
 			"@commitlint/cli": "^21.2.3",
 			"@types/bun": "latest",
 			"eslint-plugin-no-relative-import-paths": "^1.6.1",
-			"oxfmt": ">=0.72.0 <1",
-			"oxlint": "^1.87.0",
-			"oxlint-tsgolint": "^7.0.2003"
+			"oxfmt": ">=0.73.0 <1",
+			"oxlint": "^1.88.0",
+			"oxlint-tsgolint": "^7.0.2004"
 		},
 		"stencil": {
 			"@stencil/core": "5.0.0-beta.26",
@@ -60,6 +61,11 @@
 			"@mozilla/readability": "^0.6.0",
 			"@vitest/browser-webdriverio": "^5.0.0",
 			"webdriverio": "^10.0.2"
+		},
+		"webidl": {
+			"@types/webidl2": "^24.4.4",
+			"@webref/idl": "^3.85.2",
+			"webidl2": "^24.5.0"
 		}
 	}
 }

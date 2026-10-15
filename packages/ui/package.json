@@ -46,9 +46,13 @@
 	"devDependencies": {
 		"@mozilla/readability": "catalog:test",
 		"@stencil/unplugin": "catalog:stencil",
+		"@types/webidl2": "catalog:webidl",
 		"@vitest/browser-webdriverio": "catalog:test",
+		"@webref/idl": "catalog:webidl",
+		"unplugin": "catalog:",
 		"vite-plus": "catalog:",
-		"webdriverio": "catalog:test"
+		"webdriverio": "catalog:test",
+		"webidl2": "catalog:webidl"
 	},
 	"engines": {
 		"node": "^24.14.0 || >=26"
