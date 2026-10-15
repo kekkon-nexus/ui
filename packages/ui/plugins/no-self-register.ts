@@ -1,9 +1,11 @@
 import type { Plugin } from "vite-plus";
 
-// Workaround: @stencil/unplugin hardcodes `componentExport: "customelement"`, so every
-// component registers itself on import. Importing `proxyCustomElement` under the same
-// local name keeps the metadata proxy and drops `customElements.define`; registration
-// lives in each component's `define.ts`.
+/**
+ * Workaround: `@stencil/unplugin` hardcodes `componentExport: "customelement"`, so every
+ * component registers itself on import. Importing `proxyCustomElement` under the same
+ * local name keeps the metadata proxy and drops `customElements.define`; registration
+ * lives in each component's `define.ts`.
+ */
 export const noSelfRegister: Plugin = {
 	name: "no-self-register",
 	transform: {

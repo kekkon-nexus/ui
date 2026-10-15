@@ -32,10 +32,10 @@ export class Button extends Base {
 		else if (this.type === "reset") form?.reset();
 	};
 
-	// Only Space is canceled, to stop the page scrolling.
-	// Canceling every key would also swallow the arrow keys
-	// a surrounding `focusgroup` moves focus with.
 	#onKeyDown = (event: KeyboardEvent): void => {
+		// Only Space is canceled, to stop the page scrolling.
+		// Canceling every key would also swallow the arrow keys
+		// a surrounding `focusgroup` moves focus with.
 		if (this.disabled && event.key === " ") event.preventDefault();
 	};
 
