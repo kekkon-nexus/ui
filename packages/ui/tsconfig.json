@@ -3,6 +3,7 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"experimentalDecorators": true,
+		"useDefineForClassFields": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "@stencil/core",
 
