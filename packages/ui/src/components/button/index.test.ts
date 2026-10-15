@@ -22,6 +22,16 @@ async function mount(
 	return host;
 }
 
+it("props start at their defaults", async () => {
+	const host = (await mount()) as HTMLKnuiButtonElement;
+
+	expect({
+		disabled: host.disabled,
+		focusableWhenDisabled: host.focusableWhenDisabled,
+		type: host.type,
+	}).toEqual({ disabled: false, focusableWhenDisabled: false, type: "button" });
+});
+
 it("click reaches the host", async () => {
 	const host = await mount();
 	const onClick = vi.fn();
