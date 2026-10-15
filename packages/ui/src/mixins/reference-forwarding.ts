@@ -1,23 +1,18 @@
 import { getElement, getShadowRoot, type MixedInCtor } from "@stencil/core";
+import {
+	elementListProperties,
+	elementProperties,
+} from "virtual:element-references";
 
 export const CONTROL_ID = "control";
 
+// Interest invokers are not in the HTML spec yet, so its IDL has no `interestForElement`.
 const ELEMENT_PROPERTIES = new Map([
-	["aria-activedescendant", "ariaActiveDescendantElement"],
-	["commandfor", "commandForElement"],
+	...elementProperties,
 	["interestfor", "interestForElement"],
-	["popovertarget", "popoverTargetElement"],
 ]);
 
-const ELEMENT_LIST_PROPERTIES = new Map([
-	["aria-controls", "ariaControlsElements"],
-	["aria-describedby", "ariaDescribedByElements"],
-	["aria-details", "ariaDetailsElements"],
-	["aria-errormessage", "ariaErrorMessageElements"],
-	["aria-flowto", "ariaFlowToElements"],
-	["aria-labelledby", "ariaLabelledByElements"],
-	["aria-owns", "ariaOwnsElements"],
-]);
+const ELEMENT_LIST_PROPERTIES = new Map(elementListProperties);
 
 const COPIED_ATTRIBUTES = new Set(["command", "popovertargetaction"]);
 
