@@ -60,7 +60,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun ci
 
-      - if: matrix.browser == 'safari'
+      - name: Enable required Safari settings
+        if: matrix.browser == 'safari'
         run: |
           prefs=~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
           defaults write "$prefs" WebKitExperimentalShadowRootReferenceTargetEnabled -bool true
