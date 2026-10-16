@@ -35,6 +35,13 @@ const INPUT_ATTRIBUTES = new Set([
 	...INCLUDED,
 ]);
 
+declare global {
+	/** Stencil generates element types from `@Prop`s and `@Method`s only. */
+	interface HTMLKnuiInputElement {
+		value: string;
+	}
+}
+
 const Base: ReturnType<typeof Mixin<[typeof ReferenceForwarding]>> =
 	Mixin(ReferenceForwarding);
 

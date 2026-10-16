@@ -5,14 +5,11 @@ import "@/components/input/define";
 
 const referenceTargetSupported = "referenceTarget" in ShadowRoot.prototype;
 
-// The generated element type only lists `@Prop`s and `@Method`s.
-type InputElement = HTMLKnuiInputElement & { value: string };
-
 async function mount(
 	attributes: Record<string, string> = {},
 	parent?: Element,
-): Promise<InputElement> {
-	const host = document.createElement("knui-input") as InputElement;
+): Promise<HTMLKnuiInputElement> {
+	const host = document.createElement("knui-input");
 	for (const [name, value] of Object.entries(attributes)) {
 		host.setAttribute(name, value);
 	}
