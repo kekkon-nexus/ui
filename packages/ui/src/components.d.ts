@@ -5,120 +5,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/runtime";
 export namespace Components {
-    interface KnuiButton {
-        /**
-          * @default false
-         */
-        "disabled": boolean;
-        /**
-          * @default false
-         */
-        "focusableWhenDisabled": boolean;
-        /**
-          * @default "button"
-         */
-        "type": "button" | "reset" | "submit";
-    }
-    interface KnuiInput {
-    }
-    interface KnuiSeparator {
-        /**
-          * @default "horizontal"
-         */
-        "orientation": "horizontal" | "vertical";
-    }
 }
 declare global {
-    interface HTMLKnuiButtonElement extends Components.KnuiButton, HTMLStencilElement {
-    }
-    var HTMLKnuiButtonElement: {
-        prototype: HTMLKnuiButtonElement;
-        new (): HTMLKnuiButtonElement;
-    };
-    interface HTMLKnuiInputElement extends Components.KnuiInput, HTMLStencilElement {
-    }
-    var HTMLKnuiInputElement: {
-        prototype: HTMLKnuiInputElement;
-        new (): HTMLKnuiInputElement;
-    };
-    interface HTMLKnuiSeparatorElement extends Components.KnuiSeparator, HTMLStencilElement {
-    }
-    var HTMLKnuiSeparatorElement: {
-        prototype: HTMLKnuiSeparatorElement;
-        new (): HTMLKnuiSeparatorElement;
-    };
     interface HTMLElementTagNameMap {
-        "knui-button": HTMLKnuiButtonElement;
-        "knui-input": HTMLKnuiInputElement;
-        "knui-separator": HTMLKnuiSeparatorElement;
     }
 }
 declare namespace LocalJSX {
-    interface KnuiButton {
-        /**
-          * @default false
-         */
-        "disabled"?: boolean;
-        /**
-          * @default false
-         */
-        "focusableWhenDisabled"?: boolean;
-        /**
-          * The `id` of a `<form>` element to associate this element with.
-         */
-        "form"?: string;
-        /**
-          * The name of the element, used when submitting an HTML form.
-         */
-        "name"?: string;
-        /**
-          * @default "button"
-         */
-        "type"?: "button" | "reset" | "submit";
-    }
-    interface KnuiInput {
-        /**
-          * If `true`, the user cannot interact with the element.
-         */
-        "disabled"?: boolean;
-        /**
-          * The `id` of a `<form>` element to associate this element with.
-         */
-        "form"?: string;
-        /**
-          * The name of the element, used when submitting an HTML form.
-         */
-        "name"?: string;
-    }
-    interface KnuiSeparator {
-        /**
-          * @default "horizontal"
-         */
-        "orientation"?: "horizontal" | "vertical";
-    }
-
-    interface KnuiButtonAttributes {
-        "disabled": boolean;
-        "focusableWhenDisabled": boolean;
-        "type": "button" | "reset" | "submit";
-    }
-    interface KnuiSeparatorAttributes {
-        "orientation": "horizontal" | "vertical";
-    }
-
     interface IntrinsicElements {
-        "knui-button": Omit<KnuiButton, keyof KnuiButtonAttributes> & { [K in keyof KnuiButton & keyof KnuiButtonAttributes]?: KnuiButton[K] } & { [K in keyof KnuiButton & keyof KnuiButtonAttributes as `attr:${K}`]?: KnuiButtonAttributes[K] } & { [K in keyof KnuiButton & keyof KnuiButtonAttributes as `prop:${K}`]?: KnuiButton[K] };
-        "knui-input": KnuiInput;
-        "knui-separator": Omit<KnuiSeparator, keyof KnuiSeparatorAttributes> & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes]?: KnuiSeparator[K] } & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes as `attr:${K}`]?: KnuiSeparatorAttributes[K] } & { [K in keyof KnuiSeparator & keyof KnuiSeparatorAttributes as `prop:${K}`]?: KnuiSeparator[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "knui-button": LocalJSX.IntrinsicElements["knui-button"] & JSXBase.HTMLAttributes<HTMLKnuiButtonElement>;
-            "knui-input": LocalJSX.IntrinsicElements["knui-input"] & JSXBase.HTMLAttributes<HTMLKnuiInputElement>;
-            "knui-separator": LocalJSX.IntrinsicElements["knui-separator"] & JSXBase.HTMLAttributes<HTMLKnuiSeparatorElement>;
         }
     }
 }

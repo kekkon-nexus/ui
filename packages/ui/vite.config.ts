@@ -5,7 +5,6 @@ import { defineConfig } from "vite-plus";
 // oxlint-disable no-relative-import-paths/no-relative-import-paths -- Vite doesn't resolve tsconfig paths in its own config
 import { computedRole } from "./commands/computed-role.ts";
 import { noSelfRegister } from "./plugins/no-self-register.ts";
-import { reflectedAttributes } from "./plugins/reflected-attributes.ts";
 // oxlint-enable no-relative-import-paths/no-relative-import-paths
 
 const { CHROME_BIN, FIREFOX_BIN, SAFARI_BIN } = process.env;
@@ -15,7 +14,7 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 		tsconfigPaths: true,
 	},
 
-	plugins: [unpluginStencil.vite(), noSelfRegister, reflectedAttributes.vite()],
+	plugins: [unpluginStencil.vite(), noSelfRegister],
 
 	// Stencil's compiled output imports these, so Vite only discovers them mid-run
 	// and reloads the page under the running test.
@@ -77,7 +76,6 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 				types: true,
 			}),
 			noSelfRegister,
-			reflectedAttributes.rolldown(),
 		],
 
 		entry: ["src/**/*.{ts,tsx}", "!src/**/*.test.{ts,tsx}", "!src/**/*.d.ts"],
