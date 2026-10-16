@@ -12,8 +12,7 @@
 		"directory": "packages/ui"
 	},
 	"files": [
-		"dist/",
-		"!dist/components/*/define.d.ts"
+		"dist/"
 	],
 	"type": "module",
 	"sideEffects": [
@@ -26,7 +25,7 @@
 		},
 		"./*/define": {
 			"module-sync": "./dist/components/*/define.js",
-			"types": "./dist/components.d.ts"
+			"types": "./dist/components/*/define.d.ts"
 		},
 		"./package.json": "./package.json"
 	},
