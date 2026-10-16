@@ -1,5 +1,5 @@
 import { expect, it } from "vite-plus/test";
-import { userEvent } from "vite-plus/test/browser";
+import { commands, server, userEvent } from "vite-plus/test/browser";
 
 import "@/components/field/define";
 
@@ -13,9 +13,11 @@ async function mount(control: string): Promise<{
 		<form>
 			<knui-field>
 				<label>Email ${control}</label>
-				<knui-field-error match="valueMissing">Required</knui-field-error>
-				<knui-field-error match="typeMismatch">Not an email</knui-field-error>
-				<knui-field-error match="customError">Taken</knui-field-error>
+				<div id="errors">
+					<knui-field-error match="valueMissing">Required</knui-field-error>
+					<knui-field-error match="typeMismatch">Not an email</knui-field-error>
+					<knui-field-error match="customError">Taken</knui-field-error>
+				</div>
 			</knui-field>
 			<button>Submit</button>
 		</form>
@@ -115,3 +117,18 @@ it("a custom validity message shows its error", async () => {
 
 	expect(shown(errors)).toEqual(["customError"]);
 });
+
+it.runIf(server.browser === "chrome")(
+	"the description reads only the shown error",
+	async () => {
+		const { input } = await mount(
+			`<input type="email" required aria-describedby="errors">`,
+		);
+		expect(await commands.computedDescription("input")).toBe("");
+
+		await userEvent.type(input, "nope");
+		await userEvent.tab();
+
+		expect(await commands.computedDescription("input")).toBe("Not an email");
+	},
+);
