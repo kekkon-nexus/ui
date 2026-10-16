@@ -2,7 +2,7 @@ import { AttachInternals, Component, Mixin } from "@stencil/core";
 import type { JSX } from "@stencil/core/jsx-runtime";
 import reflected from "virtual:reflected-attributes/HTMLInputElement";
 
-import { FormAssociation } from "@/mixins/form-association";
+import { FormAssociation } from "@/controllers/form-association";
 import { CONTROL_ID, ReferenceForwarding } from "@/mixins/reference-forwarding";
 
 /**
@@ -35,16 +35,37 @@ const INPUT_ATTRIBUTES = new Set([
 	...INCLUDED,
 ]);
 
-const Base: ReturnType<
-	typeof Mixin<[typeof ReferenceForwarding, typeof FormAssociation]>
-> = Mixin(ReferenceForwarding, FormAssociation);
+const Base: ReturnType<typeof Mixin<[typeof ReferenceForwarding]>> =
+	Mixin(ReferenceForwarding);
 
 @Component({
 	tag: "knui-input",
 	encapsulation: { type: "shadow", delegatesFocus: true },
 })
 export class Input extends Base {
-	@AttachInternals() override internals!: ElementInternals;
+	@AttachInternals() internals!: ElementInternals;
+
+	#form = new FormAssociation(this);
+
+	get value(): string {
+		return this.#form.value;
+	}
+
+	set value(value: string) {
+		this.#form.value = value;
+	}
+
+	formDisabledCallback(disabled: boolean): void {
+		this.#form.disable(disabled);
+	}
+
+	formResetCallback(): void {
+		this.#form.reset();
+	}
+
+	formStateRestoreCallback(state: File | FormData | string | null): void {
+		this.#form.restore(state);
+	}
 
 	override copiesAttribute(name: string): boolean {
 		if (INPUT_ATTRIBUTES.has(name)) return true;
@@ -55,9 +76,9 @@ export class Input extends Base {
 		return (
 			<input
 				id={CONTROL_ID}
-				ref={this.controlRef}
-				onInput={this.syncControl}
-				onChange={this.onControlChange}
+				ref={this.#form.ref}
+				onInput={this.#form.sync}
+				onChange={this.#form.change}
 			/>
 		);
 	}
