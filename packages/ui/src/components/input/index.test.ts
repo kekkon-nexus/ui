@@ -109,6 +109,20 @@ it("change reaches the host", async () => {
 	expect(onChange).toHaveBeenCalledOnce();
 });
 
+it("text styles on the host reach the inner input", async () => {
+	const host = await mount();
+
+	host.style.font = "italic 20px serif";
+	host.style.color = "rgb(255, 0, 0)";
+
+	const style = getComputedStyle(control(host));
+	expect([style.fontStyle, style.fontSize, style.color]).toEqual([
+		"italic",
+		"20px",
+		"rgb(255, 0, 0)",
+	]);
+});
+
 // Without reference target the label clicks the host, which never reaches the inner input.
 it.runIf(referenceTargetSupported)(
 	"label for the host focuses the inner input",
