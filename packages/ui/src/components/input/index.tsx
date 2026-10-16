@@ -48,6 +48,19 @@ const Base: ReturnType<typeof Mixin<[typeof ReferenceForwarding]>> =
 @Component({
 	tag: "knui-input",
 	encapsulation: { type: "shadow", delegatesFocus: true },
+	// The host is the box consumers style. `part="control"` reaches what the host cannot:
+	// `::placeholder`, `::selection` and `:autofill`.
+	styles: `
+		:host {
+			display: inline-block;
+		}
+		input {
+			all: unset;
+			display: block;
+			box-sizing: border-box;
+			inline-size: 100%;
+		}
+	`,
 })
 export class Input extends Base {
 	@AttachInternals() internals!: ElementInternals;
@@ -83,6 +96,7 @@ export class Input extends Base {
 		return (
 			<input
 				id={CONTROL_ID}
+				part="control"
 				ref={this.#form.ref}
 				onInput={this.#form.sync}
 				onChange={this.#form.change}
