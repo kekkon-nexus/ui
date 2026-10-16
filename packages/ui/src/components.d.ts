@@ -5,19 +5,58 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/runtime";
 export namespace Components {
+    interface KnuiField {
+    }
+    interface KnuiFieldError {
+        /**
+          * The validity key this message is for. Without it, the message shows for any invalid value.
+         */
+        "match"?: Exclude<keyof ValidityState, "valid">;
+    }
 }
 declare global {
+    interface HTMLKnuiFieldElement extends Components.KnuiField, HTMLStencilElement {
+    }
+    var HTMLKnuiFieldElement: {
+        prototype: HTMLKnuiFieldElement;
+        new (): HTMLKnuiFieldElement;
+    };
+    interface HTMLKnuiFieldErrorElement extends Components.KnuiFieldError, HTMLStencilElement {
+    }
+    var HTMLKnuiFieldErrorElement: {
+        prototype: HTMLKnuiFieldErrorElement;
+        new (): HTMLKnuiFieldErrorElement;
+    };
     interface HTMLElementTagNameMap {
+        "knui-field": HTMLKnuiFieldElement;
+        "knui-field-error": HTMLKnuiFieldErrorElement;
     }
 }
 declare namespace LocalJSX {
+    interface KnuiField {
+    }
+    interface KnuiFieldError {
+        /**
+          * The validity key this message is for. Without it, the message shows for any invalid value.
+         */
+        "match"?: Exclude<keyof ValidityState, "valid">;
+    }
+
+    interface KnuiFieldErrorAttributes {
+        "match": string;
+    }
+
     interface IntrinsicElements {
+        "knui-field": KnuiField;
+        "knui-field-error": Omit<KnuiFieldError, keyof KnuiFieldErrorAttributes> & { [K in keyof KnuiFieldError & keyof KnuiFieldErrorAttributes]?: KnuiFieldError[K] } & { [K in keyof KnuiFieldError & keyof KnuiFieldErrorAttributes as `attr:${K}`]?: KnuiFieldErrorAttributes[K] } & { [K in keyof KnuiFieldError & keyof KnuiFieldErrorAttributes as `prop:${K}`]?: KnuiFieldError[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "knui-field": LocalJSX.IntrinsicElements["knui-field"] & JSXBase.HTMLAttributes<HTMLKnuiFieldElement>;
+            "knui-field-error": LocalJSX.IntrinsicElements["knui-field-error"] & JSXBase.HTMLAttributes<HTMLKnuiFieldErrorElement>;
         }
     }
 }
