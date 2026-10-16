@@ -41,7 +41,6 @@
 	"catalog": {
 		"@kekkon-nexus/config": "^4.0.0",
 		"typescript": "^7.0.2",
-		"unplugin": "^3.4.0",
 		"vite-plus": "^1.2.0"
 	},
 	"catalogs": {
@@ -58,14 +57,8 @@
 			"@stencil/unplugin": "5.0.0-beta.26"
 		},
 		"test": {
-			"@mozilla/readability": "^0.6.0",
 			"@vitest/browser-webdriverio": "^5.0.0",
 			"webdriverio": "^10.0.2"
-		},
-		"webidl": {
-			"@types/webidl2": "^24.4.4",
-			"@webref/idl": "^3.85.2",
-			"webidl2": "^24.5.0"
 		}
 	}
 }
